@@ -12,7 +12,26 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: LayoutComponent
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        redirectTo:'/dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        loadChildren: () => import('../modules/dashboard/dashboard.module').then(m => m.DashboardModule)
+      },
+      {
+        path: 'executions',
+        loadChildren: () => import('../modules/executions/executions.module').then(m => m.ExecutionsModule)
+      },
+      {
+        path: 'scheduling',
+        loadChildren: () => import('../modules/scheduling/scheduling.module').then(m => m.SchedulingModule)
+      },
+    ]
   },
   {
     path: '**',
